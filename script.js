@@ -3,8 +3,8 @@ const canvas = document.getElementById("mapa");
 const ctx = canvas.getContext("2d");
 
 const TAMANHO = 24; // tamanho de cada quadradinho, em pixels
-const COLUNAS = Math.floor(canvas.width / TAMANHO);
-const LINHAS = Math.floor(canvas.height / TAMANHO);
+const COLUNAS = canvas.width / TAMANHO;
+const LINHAS = canvas.height / TAMANHO;
 
 // ===== 2. O mapa na memória =====
 // 0 = célula vazia, 1 = célula pintada
@@ -27,7 +27,7 @@ function desenhar() {
         ctx.fillRect(x, y, TAMANHO, TAMANHO);
       }
 
-      ctx.strokeStyle = "#1dad4d";
+      ctx.strokeStyle = "#1a1a2e";
       ctx.strokeRect(x, y, TAMANHO, TAMANHO);
     }
   }
