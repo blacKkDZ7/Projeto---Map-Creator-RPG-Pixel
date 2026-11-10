@@ -2,7 +2,7 @@
 const canvas = document.getElementById("mapa");
 const ctx = canvas.getContext("2d");
 
-const TAMANHO = 16; // tamanho de cada quadradinho, em pixels
+const TAMANHO = 24; // tamanho de cada quadradinho, em pixels
 const COLUNAS = canvas.width / TAMANHO;
 const LINHAS = canvas.height / TAMANHO;
 
@@ -27,7 +27,7 @@ function desenhar() {
         ctx.fillRect(x, y, TAMANHO, TAMANHO);
       }
 
-      ctx.strokeStyle = "#2a2a4a";
+      ctx.strokeStyle = "#1dad4d";
       ctx.strokeRect(x, y, TAMANHO, TAMANHO);
     }
   }
