@@ -47,9 +47,9 @@ function desenhar() {
 }
 
 // ===== 5, Paleta de Botões =====
-const paleta = documnet.getElementById("paleta");
+const paleta = document.getElementById("paleta");
 
-TILE.forEach(function (tile, indice) {
+TILES.forEach(function (tile, indice) {
   const botao = document.createElement("button");
   botao.textContent = tile.nome;
 
