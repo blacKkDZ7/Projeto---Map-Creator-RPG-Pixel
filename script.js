@@ -82,7 +82,7 @@ function pintarCelula(evento) {
   const coluna = Math.floor(x / TAMANHO);
   const linha = Math.floor(y / TAMANHO);
 
-  if (linha >= 0 || linha < LINHAS || coluna >= 0 || coluna < COLUNAS) {
+  if (linha < 0 || linha >= LINHAS || coluna < 0 || coluna >= COLUNAS) {
     return;
   }
   if (mapa[linha][coluna] === tileAtual) {
@@ -105,7 +105,7 @@ canvas.addEventListener("mousemove", function (evento) {
   }
 });
 
-canvas.addEventListener("mouseup", function () {
+window.addEventListener("mouseup", function () {
   pintando = false;
 });
 
@@ -125,7 +125,7 @@ document.getElementById("btn-carregar").addEventListener("click", function () {
   }
 
   const dados = JSON.parse(salvo);
-  if (dados.lenth !== LINHAS || dados[0].length !== COLUNAS) {
+  if (dados.length !== LINHAS || dados[0].length !== COLUNAS) {
     alert("O mapa salvo tem um tamanho diferente do atual.");
     return;
   }
