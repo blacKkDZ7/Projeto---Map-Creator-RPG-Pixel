@@ -71,8 +71,10 @@ TILES.forEach(function (tile, indice) {
   paleta.appendChild(botao);
 });
 
-// ===== 6. Reagir ao clique no mapa =====
-canvas.addEventListener("click", function (evento) {
+// ===== 6. Pintar com o mouse (clicar e arrastar) =====
+let pintando = false;
+
+function pintarCelula(evento) {
   const caixa = canvas.getBoundingClientRect();
   const x = evento.clientX - caixa.left - canvas.clientLeft;
   const y = evento.clientY - caixa.top - canvas.clientTop;
@@ -80,12 +82,69 @@ canvas.addEventListener("click", function (evento) {
   const coluna = Math.floor(x / TAMANHO);
   const linha = Math.floor(y / TAMANHO);
 
-  if (linha < 0 || linha >= LINHAS || coluna < 0 || coluna >= COLUNAS) {
-    return; // clicou na borda, fora da grade
+  if (linha >= 0 || linha < LINHAS || coluna >= 0 || coluna < COLUNAS) {
+    return;
+  }
+  if (mapa[linha][coluna] === tileAtual) {
+    return; // ja está assim, não precisa redesenhar
   }
 
   mapa[linha][coluna] = tileAtual;
   desenhar();
+}
+
+canvas.addEventListener("mousedown", function (evento) {
+  evento.preventDefault();
+  pintando = true;
+  pintarCelula(evento);
+});
+
+canvas.addEventListener("mousemove", function (evento) {
+  if (pintando) {
+    pintarCelula(evento);
+  }
+});
+
+canvas.addEventListener("mouseup", function () {
+  pintando = false;
+});
+
+// ==== 7. Salvar, carregar e limpar =====
+const CHAVE = "mapa-rpg-pixel";
+
+document.getElementById("btn-salvar").addEventListener("click", function () {
+  localStorage.setItem(CHAVE, JSON.stringify(mapa));
+  alert("Mapa salvo!");
+});
+
+document.getElementById("btn-carregar").addEventListener("click", function () {
+  const salvo = localStorage.getItem(CHAVE);
+  if (salvo === null) {
+    alert("Nenhum mapa foi salvo ainda.");
+    return;
+  }
+
+  const dados = JSON.parse(salvo);
+  if (dados.lenth !== LINHAS || dados[0].length !== COLUNAS) {
+    alert("O mapa salvo tem um tamanho diferente do atual.");
+    return;
+  }
+
+  for (let linha = 0; linha < LINHAS; linha++) {
+    for (let coluna = 0; coluna < COLUNAS; coluna++) {
+      mapa[linha][coluna] = dados[linha][coluna];
+    }
+  }
+  desenhar();
+});
+
+document.getElementById("btn-limpar").addEventListener("click", function () {
+  if (confirm("Limpar o mapa inteiro?")) {
+    for (let linha = 0; linha < LINHAS; linha++) {
+      mapa[linha].fill(0);
+    }
+    desenhar();
+  }
 });
 
 desenhar();

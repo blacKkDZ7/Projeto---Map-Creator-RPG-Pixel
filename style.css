@@ -27,3 +27,21 @@ canvas {
 #paleta button.ativo {
   border-color: #7a7aff;
 }
+
+#acoes {
+  margin-bottom: 12px;
+}
+
+#acoes button {
+  background: #1a1a2e;
+  color: #e0e0e0;
+  border: 3px solid #444;
+  padding: 6px 14px;
+  margin: 0 4px;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+#acoes button:hover {
+  border-color: #7a7aff;
+}
