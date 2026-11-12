@@ -2,7 +2,7 @@
 const canvas = document.getElementById("mapa");
 const ctx = canvas.getContext("2d");
 
-const TAMANHO = 24; // tamanho de cada quadradinho, em pixels
+const TAMANHO = 20; // tamanho de cada quadradinho, em pixels
 const COLUNAS = Math.floor(canvas.width / TAMANHO);
 const LINHAS = Math.floor(canvas.height / TAMANHO);
 
